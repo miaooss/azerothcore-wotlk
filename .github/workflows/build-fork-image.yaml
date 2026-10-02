@@ -14,7 +14,7 @@ name: Build and Push (fork image)
 on:
   push:
     branches:
-      - feature/realm-enforce-id-config
+      - docker-build-fork
   workflow_dispatch: {}
 
 concurrency:
