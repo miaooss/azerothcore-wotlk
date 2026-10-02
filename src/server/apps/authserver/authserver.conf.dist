@@ -114,6 +114,21 @@ ProcessPriority = 0
 RealmsStateUpdateDelay = 20
 
 #
+#    Realm.ResetOfflineOnStart
+#        Description: On startup, mark every realmlist row offline until its
+#                      worldserver clears the flag on its own row. Disable
+#                      only if you intentionally point multiple realmlist
+#                      rows (e.g. one per network/VPN address) at a single
+#                      worldserver - rows other than that worldserver's own
+#                      RealmID have no worldserver to ever clear their flag,
+#                      and would otherwise stay stuck offline after every
+#                      authserver restart.
+#        Default:     1 - (Enabled)
+#                      0 - (Disabled)
+
+Realm.ResetOfflineOnStart = 1
+
+#
 #    WrongPass.MaxCount
 #        Description: Number of login attempts with wrong password before the account or IP will be
 #                     banned.

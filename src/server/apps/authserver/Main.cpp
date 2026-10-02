@@ -132,7 +132,13 @@ int main(int argc, char** argv)
 
     // Mark every realm offline on startup; each worldserver clears this flag for its own realm once it is ready.
     // This prevents realms from appearing online in the realm list when no worldserver is actually running.
-    LoginDatabase.DirectExecute("UPDATE realmlist SET flag = flag | {}", REALM_FLAG_OFFLINE);
+    // Skipped when Realm.ResetOfflineOnStart is disabled: useful for setups where multiple realmlist rows
+    // (e.g. one address per network) are aliases for a single worldserver - rows other than that
+    // worldserver's own RealmID would never get their offline bit cleared, and would stay stuck offline
+    // after every authserver restart. See also Realm.EnforceId (worldserver), a separate option for the
+    // same kind of setup.
+    if (sConfigMgr->GetOption<bool>("Realm.ResetOfflineOnStart", true))
+        LoginDatabase.DirectExecute("UPDATE realmlist SET flag = flag | {}", REALM_FLAG_OFFLINE);
 
     std::shared_ptr<Acore::Asio::IoContext> ioContext = std::make_shared<Acore::Asio::IoContext>();
 
