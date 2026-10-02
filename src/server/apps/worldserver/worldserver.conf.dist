@@ -93,6 +93,18 @@
 RealmID = 1
 
 #
+#    Realm.EnforceId
+#        Description: Reject clients that selected a realmlist entry whose
+#                      id doesn't match this worldserver's RealmID. Disable
+#                      only if you intentionally point multiple realmlist
+#                      rows (e.g. one per network/VPN address) at this same
+#                      worldserver.
+#        Default:     1 - (Enabled)
+#                      0 - (Disabled)
+
+Realm.EnforceId = 1
+
+#
 #    WorldServerPort
 #        Description: TCP port to reach the world server.
 #        Default:     8085
